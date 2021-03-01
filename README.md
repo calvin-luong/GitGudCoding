@@ -2,7 +2,20 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+## What you need to have installed in your terminal
+
+- node 
+- xcode 
+
 ## Available Scripts
+
+First make sure you git clone the directory or your changes cannot be pushed 
+via terminal
+
+Next cd into your cloned directory and run 
+
+### `npm install`
 
 In the project directory, you can run:
 
