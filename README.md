@@ -17,6 +17,12 @@ GitGud Codings Front-End
 - X-code developing software (Probably have this already)
 
 ## Starting app 
+**Note this directory must be named "gitgudcoding"
+
+> cd gitgudcoding 
+> npm install 
+
+
 To Build the Front-End only run 
 
 > npm run client
