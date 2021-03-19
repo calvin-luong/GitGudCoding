@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./styles/index.css";
-import Fake from "./fake";
+import "./styles/index.scss";
+import App from "./app";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Fake />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
