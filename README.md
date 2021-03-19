@@ -40,12 +40,3 @@ Ticket-Name-ABRV ( Keeping it simple)
 PRs: 
 Requires 1 review before pushing to master
 
-
-
-
-
-
-
-
-
-
