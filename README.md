@@ -34,5 +34,18 @@ To Build the whole app run
 
 ## Structure/Rules/Format
 
-Will Update soon
+Branch Naming: 
+Ticket-Name-ABRV ( Keeping it simple) 
+
+PRs: 
+Requires 1 review before pushing to master
+
+
+
+
+
+
+
+
+
 
