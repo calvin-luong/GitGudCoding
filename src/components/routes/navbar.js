@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Video from "./video";
+import VideoList from "./videoList";
 
 class navbar extends Component {
+
   state = { 
-    result: [{id:"eIrMbAQSU34", value: 0},
-    {id:"RRubcjpTkks", value:0},
-    {id:"grEKMHGYyns", value:0}],
+    result: [],
    }
   render() { 
     const self = this.state;
+    const selfself = this;
     return (
       <div>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -41,15 +41,18 @@ class navbar extends Component {
                 for (let i = 0; i < 3; i++)
                 {
                   self.result.push({id: response.data[i].id.videoId});
-                }              
+                }
+                selfself.forceUpdate();
+                self.result.pop();
+                self.result.pop();
+                self.result.pop();
               })
               .catch(function (error) {
                 console.log(error);
               });
-              
               console.log(self.result);
-
-              }}>
+              }
+              }>
               Submit
             </button>
           <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
@@ -68,20 +71,7 @@ class navbar extends Component {
           </div>
         </nav>
 
-        <h1>Videos</h1>
-        <table
-          style={{
-            marginLeft: "auto",
-            marginRight: "auto",
-            backgroundColor: "gray",
-          }}
-        >
-          {this.state.result.map((result) => (
-            <th style={{ padding: "50px" }}>
-              <Video key={result.id} />
-            </th>
-          ))}
-        </table>
+        <VideoList input={self.result}></VideoList>
       </div>
     );
   }

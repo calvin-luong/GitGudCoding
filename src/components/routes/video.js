@@ -3,11 +3,10 @@ import ReactPlayer from "react-player/youtube";
 
 class video extends Component {
   state = {
-    urlInput : "eIrMbAQSU34",
   };
 
   render() {
-    const urlString = "https://www.youtube.com/watch?v=" + this.state.urlInput;
+    const urlString = "https://www.youtube.com/watch?v=" + this.props.urlInput;
 
     return (
 

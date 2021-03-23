@@ -3,7 +3,7 @@ import Video from "./video";
 
 class videoList extends Component {
   state = {
-    vids: [{id:"eIrMbAQSU34", value: 0},{id:"eIrMbAQSU34", value:0},{id:"eIrMbAQSU34", value:0}],
+    vids: this.props.input,
   };
   render() {
     return (
@@ -18,7 +18,7 @@ class videoList extends Component {
         >
           {this.state.vids.map((vids) => (
             <th style={{ padding: "50px" }}>
-              <Video key={vids.id} />
+              <Video urlInput={vids.id} />
             </th>
           ))}
         </table>
