@@ -5,11 +5,9 @@ class video extends Component {
   state = {};
   render() {
     return (
-      <div>
-        <h1>Video Title</h1>
+      <React.Fragment>
         <ReactPlayer url="https://www.youtube.com/watch?v=ysz5S6PUM-U" />
-        <br></br>
-      </div>
+      </React.Fragment>
     );
   }
 }
