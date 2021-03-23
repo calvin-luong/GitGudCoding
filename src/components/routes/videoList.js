@@ -3,11 +3,7 @@ import Video from "./video";
 
 class videoList extends Component {
   state = {
-    vids: [
-      { id: 1, value: "dsadasdsa" },
-      { id: 2, value: 0 },
-      { id: 3, value: 0 },
-    ],
+    vids: [{id:"eIrMbAQSU34", value: 0},{id:"eIrMbAQSU34", value:0},{id:"eIrMbAQSU34", value:0}],
   };
   render() {
     return (

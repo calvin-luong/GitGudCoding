@@ -2,11 +2,17 @@ import React, { Component } from "react";
 import ReactPlayer from "react-player/youtube";
 
 class video extends Component {
-  state = {};
+  state = {
+    urlInput : "eIrMbAQSU34",
+  };
+
   render() {
+    const urlString = "https://www.youtube.com/watch?v=" + this.state.urlInput;
+
     return (
+
       <React.Fragment>
-        <ReactPlayer url="https://www.youtube.com/watch?v=ysz5S6PUM-U" />
+        <ReactPlayer url={urlString} />
       </React.Fragment>
     );
   }
