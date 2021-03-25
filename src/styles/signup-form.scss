@@ -1,0 +1,26 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+.signup-form {
+  float: right;
+  width: 50%;
+  height: 100%;
+
+  &-container {
+    padding: 100px;
+    align-items: center;
+  }
+
+  &-title {
+    font-size: xx-large;
+  }
+
+  &-google-button-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &-google-button {
+    padding: 0;
+    margin: 0;
+  }
+}
