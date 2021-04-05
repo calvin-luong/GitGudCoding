@@ -8,6 +8,7 @@ import Login from "./components/login.component";
 import SignUp from "./components/signup.component";
 import Search from "./components/routes/navbar";
 import NavBar from "./components/routes/navbar";
+import Landing from "./components/landing";
 
 function App() {
   return (<Router>
@@ -18,6 +19,7 @@ function App() {
         <div className="auth-inner">
           <Switch>
             <Route exact path='/' component={Login} />
+            <Route path="/landing" component={Landing}/>
             <Route path="/navbar" component={Search} />
             <Route path="/sign-in" component={Login} />
             <Route path="/sign-up" component={SignUp} />
