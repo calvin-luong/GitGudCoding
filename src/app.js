@@ -1,32 +1,30 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import Home from "./components/routes/home";
 import About from "./components/routes/about";
-import Login from "./components/login.component";
-import SignUp from "./components/signup.component";
-import Search from "./components/routes/navbar";
-import NavBar from "./components/routes/navbar";
+import SignIn from "./components/routes/signin";
+import SignUp from "./components/routes/signup";
+import SearchNavBar from "./components/routes/searchNavBar";
 import Landing from "./components/landing";
 
 function App() {
-  return (<Router>
-    <div className="App">
-
-      <div className="auth-wrapper">
-        <NavBar />
-        <div className="auth-inner">
-          <Switch>
-            <Route exact path='/' component={Login} />
-            <Route path="/landing" component={Landing}/>
-            <Route path="/navbar" component={Search} />
-            <Route path="/sign-in" component={Login} />
-            <Route path="/sign-up" component={SignUp} />
-          </Switch>
+  return (
+    <Router>
+      <div className="App">
+        <div className="auth-wrapper">
+          <div className="auth-inner">
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <Route path="/search" component={SearchNavBar} />
+              <Route path="/login" component={SignIn} />
+              <Route path="/sign-up" component={SignUp} />
+            </Switch>
+          </div>
         </div>
       </div>
-    </div></Router>
+    </Router>
   );
 }
 
