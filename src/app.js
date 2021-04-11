@@ -8,6 +8,8 @@ import SignIn from "./components/routes/signin";
 import SignUp from "./components/routes/signup";
 import SearchNavBar from "./components/routes/searchNavBar";
 import Landing from "./components/landing";
+import Discussion from "./components/routes/discussion";
+import Post from "./components/routes/post";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
               <Route path="/search" component={SearchNavBar} />
               <Route path="/login" component={SignIn} />
               <Route path="/sign-up" component={SignUp} />
+              <Route path="/discussion" component={Discussion} />
+              <Route path="/post" component={Post} />
             </Switch>
           </div>
         </div>
