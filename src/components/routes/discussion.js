@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
 import NavBar from "./navbar";
+import DiscPost from "./discpost";
 
 class discussion extends Component {
   state = {};
@@ -8,22 +8,7 @@ class discussion extends Component {
     return (
       <div>
         <NavBar></NavBar>
-        <br />
-        <br />
-        &nbsp;&nbsp;&nbsp;
-        <Button style={{ backgroundColor: "gray" }}>Create a Post</Button>
-        &nbsp;&nbsp;&nbsp;
-        <input type="text" placeholder="Search" id="searchInput" />
-        &nbsp;&nbsp;&nbsp;
-        <Button
-          style={{
-            borderColor: "black",
-            backgroundColor: "white",
-            color: "black",
-          }}
-        >
-          Search
-        </Button>
+        <DiscPost></DiscPost>
       </div>
     );
   }
