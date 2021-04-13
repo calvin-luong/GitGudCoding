@@ -2,11 +2,6 @@
 
 .signup-signin-card {
   float: left;
-  width: 50%;
-  height: 100%;
-
-  &-image {
-    width: 100%;
-    height: auto;
-  }
+  background-image: url('../resources/card.jpg');
+  background-size: auto 100%;
 }

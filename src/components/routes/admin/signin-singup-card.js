@@ -7,10 +7,6 @@ const CN = 'signup-signin-card';
 
 export default class SignUpSignInCard extends Component {
   render() {
-    return (
-      <div className={CN}>
-        <Image className={CN + '-image'} src={card} fluid />
-      </div>
-    );
+    return <div className={CN}></div>;
   }
 }
