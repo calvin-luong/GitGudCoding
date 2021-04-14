@@ -20,7 +20,7 @@ class searchNavBar extends Component {
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="//codeply.com">
+                <a class="nav-link" href="/discussion">
                   Discussion
                 </a>
               </li>

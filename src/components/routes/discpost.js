@@ -19,7 +19,7 @@ const DiscPost = () => {
             <div class="media-body">
               <h6>
                 <a
-                  href="#"
+                  href="/post"
                   data-toggle="collapse"
                   data-target=".forum-content"
                   class="text-body"
