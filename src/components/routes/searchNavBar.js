@@ -44,10 +44,17 @@ class searchNavBar extends Component {
               })
                 .then(function (response) {
                   console.log(response.data);
-                  for (let i = 0; i < 3; i++) {
+                  for (let i = 0; i < 5; i++) {
                     self.result.push({ id: response.data[i].id.videoId });
                   }
                   selfself.forceUpdate();
+                  self.result.pop();
+                  self.result.pop();
+                  self.result.pop();
+                  self.result.pop();
+                  self.result.pop();
+                  self.result.pop();
+                  self.result.pop();
                   self.result.pop();
                   self.result.pop();
                   self.result.pop();
