@@ -40,11 +40,12 @@ class searchNavBar extends Component {
 
               axios({
                 method: "GET",
-                url: "/api/youtube/search?query=" + input + "&resultsSize=" + 5,
+                url:
+                  "/api/youtube/search?query=" + input + "&resultsSize=" + 10,
               })
                 .then(function (response) {
                   console.log(response.data);
-                  for (let i = 0; i < 5; i++) {
+                  for (let i = 0; i < 10; i++) {
                     self.result.push({ id: response.data[i].id.videoId });
                   }
                   selfself.forceUpdate();
