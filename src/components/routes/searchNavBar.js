@@ -48,7 +48,6 @@ class searchNavBar extends Component {
                   for (let i = 0; i < 10; i++) {
                     self.result.push({ id: response.data[i].id.videoId });
                   }
-                  selfself.forceUpdate();
                   self.result.pop();
                   self.result.pop();
                   self.result.pop();
@@ -64,6 +63,8 @@ class searchNavBar extends Component {
                   console.log(error);
                 });
               console.log(self.result);
+
+              selfself.forceUpdate();
             }}
           >
             Submit

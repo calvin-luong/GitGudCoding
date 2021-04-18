@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactPlayer from "react-player/youtube";
 
 class video extends Component {
   state = {};

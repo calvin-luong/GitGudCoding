@@ -10,6 +10,7 @@ import SearchNavBar from "./components/routes/searchNavBar";
 import Landing from "./components/landing";
 import Discussion from "./components/routes/discussion";
 import Post from "./components/routes/post";
+import CreatePost from "./components/routes/createPost";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path="/sign-up" component={SignUp} />
               <Route path="/discussion" component={Discussion} />
               <Route path="/post" component={Post} />
+              <Route path="/create-post" component={CreatePost} />
             </Switch>
           </div>
         </div>
