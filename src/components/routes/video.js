@@ -2,17 +2,21 @@ import React, { Component } from "react";
 import ReactPlayer from "react-player/youtube";
 
 class video extends Component {
-  state = {
-  };
+  state = {};
 
   render() {
-    const urlString = "https://www.youtube.com/watch?v=" + this.props.urlInput;
+    const urlString = "https://www.youtube.com/embed/" + this.props.urlInput;
 
     return (
-
-      <React.Fragment>
-        <ReactPlayer url={urlString} />
-      </React.Fragment>
+      <iframe
+        width="560"
+        height="315"
+        src={urlString}
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      />
     );
   }
 }

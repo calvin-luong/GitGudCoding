@@ -9,19 +9,21 @@ class videoList extends Component {
     return (
       <div>
         <h1>Videos</h1>
-        <table
-          style={{
-            marginLeft: "auto",
-            marginRight: "auto",
-            backgroundColor: "gray",
-          }}
-        >
-          {this.state.vids.map((vids) => (
-            <th style={{ padding: "50px" }}>
-              <Video urlInput={vids.id} />
-            </th>
-          ))}
-        </table>
+        <div style={{ overflowX: "scroll" }}>
+          <table
+            style={{
+              marginLeft: "auto",
+              marginRight: "auto",
+              backgroundColor: "gray",
+            }}
+          >
+            {this.state.vids.map((vids) => (
+              <th style={{ padding: "25px", width: "5px" }}>
+                <Video urlInput={vids.id} />
+              </th>
+            ))}
+          </table>
+        </div>
       </div>
     );
   }
