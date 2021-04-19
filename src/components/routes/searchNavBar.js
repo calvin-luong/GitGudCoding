@@ -1,14 +1,46 @@
 import React, { Component } from "react";
 import axios from "axios";
 import VideoList from "./videoList";
+import $ from "jquery";
 
 class searchNavBar extends Component {
   state = {
     result: [],
   };
+  constructor(props) {
+    super(props);
+    this.onSearch = this.onSearch.bind(this);
+  }
+
+  onSearch() {
+    var input = $("#searchInput").val();
+    var self = this;
+    self.setState((state) => ({
+      result: [],
+    }));
+    axios({
+      method: "GET",
+      url: "/api/youtube/search?query=" + input + "&resultsSize=" + 10,
+    })
+      .then(function (response) {
+        console.log(response);
+        var result = [];
+
+        for (let i = 0; i < 10; i++) {
+          result.push({
+            id: response.data.searchResults[i].id.videoId,
+          });
+        }
+        self.setState((state) => ({
+          result: result,
+        }));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   render() {
-    const self = this.state;
-    const selfself = this;
     return (
       <div>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -32,39 +64,7 @@ class searchNavBar extends Component {
             </ul>
           </div>
           <input type="text" placeholder="Search" id="searchInput" />
-          <button
-            type="submit"
-            onClick={function () {
-              var input = document.getElementById("searchInput").value;
-              console.log(input);
-
-              axios({
-                method: "GET",
-                url: "/api/youtube/search?query=" + input + "&resultsSize=" + 5,
-              })
-                .then(function (response) {
-                  console.log(response.data);
-                  for (let i = 0; i < 5; i++) {
-                    self.result.push({ id: response.data[i].id.videoId });
-                  }
-                  selfself.forceUpdate();
-                  self.result.pop();
-                  self.result.pop();
-                  self.result.pop();
-                  self.result.pop();
-                  self.result.pop();
-                  self.result.pop();
-                  self.result.pop();
-                  self.result.pop();
-                  self.result.pop();
-                  self.result.pop();
-                })
-                .catch(function (error) {
-                  console.log(error);
-                });
-              console.log(self.result);
-            }}
-          >
+          <button type="submit" onClick={this.onSearch}>
             Submit
           </button>
           <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
@@ -82,7 +82,7 @@ class searchNavBar extends Component {
             </ul>
           </div>
         </nav>
-        <VideoList input={self.result}></VideoList>
+        <VideoList result={this.state.result}></VideoList>
         <div>
           <h1>Coding Tutorials</h1>
         </div>
