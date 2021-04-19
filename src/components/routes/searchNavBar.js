@@ -15,20 +15,25 @@ class searchNavBar extends Component {
   onSearch() {
     var input = $("#searchInput").val();
     var self = this;
-    console.log(this.state.result);
-
+    self.setState((state) => ({
+      result: [],
+    }));
     axios({
       method: "GET",
       url: "/api/youtube/search?query=" + input + "&resultsSize=" + 10,
     })
       .then(function (response) {
         console.log(response);
+        var result = [];
 
         for (let i = 0; i < 10; i++) {
-          self.state.result.push({
+          result.push({
             id: response.data.searchResults[i].id.videoId,
           });
         }
+        self.setState((state) => ({
+          result: result,
+        }));
       })
       .catch(function (error) {
         console.log(error);
@@ -77,7 +82,7 @@ class searchNavBar extends Component {
             </ul>
           </div>
         </nav>
-        <VideoList input={this.state.result}></VideoList>
+        <VideoList result={this.state.result}></VideoList>
         <div>
           <h1>Coding Tutorials</h1>
         </div>

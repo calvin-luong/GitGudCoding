@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import Video from "./video";
 
 class videoList extends Component {
-  state = {
-    vids: this.props.input,
-  };
   render() {
     return (
       <div>
@@ -17,11 +14,9 @@ class videoList extends Component {
               backgroundColor: "gray",
             }}
           >
-            {this.state.vids.map((vids) => (
-              <th style={{ padding: "25px", width: "5px" }}>
-                <Video
-                  urlInput={"https://www.youtube.com/watch?v=" + vids.id}
-                />
+            {this.props.result.map((vids) => (
+              <th style={{ padding: "25px", width: "300px" }}>
+                <Video urlInput={vids.id} />
               </th>
             ))}
           </table>
