@@ -19,7 +19,9 @@ class videoList extends Component {
           >
             {this.state.vids.map((vids) => (
               <th style={{ padding: "25px", width: "5px" }}>
-                <Video urlInput={vids.id} />
+                <Video
+                  urlInput={"https://www.youtube.com/watch?v=" + vids.id}
+                />
               </th>
             ))}
           </table>
