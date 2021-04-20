@@ -1,0 +1,6 @@
+@import "~bootstrap/scss/bootstrap.scss";
+.video .wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 0.5fr);
+  grid-auto-rows: 15%;
+}

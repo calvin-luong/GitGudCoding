@@ -10,13 +10,13 @@ class discussion extends Component {
         <NavBar></NavBar>
         <div class="container mt-4">
           <div class="inner-header">
-            <button
-              type="button"
+            <a
+              role="button"
               class="btn btn-outline-secondary bg-gray-200 border-gray-200 shadow-none"
-              href="#"
+              href="/create-post"
             >
               Create a Post
-            </button>
+            </a>
             <select class="custom-select custom-select-sm w-auto mr-1 float-right">
               <option selected="">Latest</option>
               <option value="1">Popular</option>
