@@ -17,8 +17,18 @@ const NavBar = () => {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/search">
-              Search
+            <a class="nav-link" href="/searchVid">
+              Videos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/searchQuestion">
+              Coding Questions
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/searchTutorial">
+              Coding Tutorials
             </a>
           </li>
         </ul>
