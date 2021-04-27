@@ -23,7 +23,7 @@ function App() {
               <Route path="/login" component={SignIn} />
               <Route path="/sign-up" component={SignUp} />
               <Route path="/discussion" component={Discussion} />
-              <Route path="/post" component={Post} />
+              <Route path="/post/:id" component={Post} />
               <Route path="/create-post" component={CreatePost} />
               <Route path="/create-post-video" component={CreatePostWVideo} />
             </Switch>

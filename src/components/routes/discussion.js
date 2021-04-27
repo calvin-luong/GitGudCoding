@@ -1,9 +1,20 @@
 import React, { Component } from "react";
 import NavBar from "./navbar";
 import DiscPost from "./discpost";
+import axios from "axios";
 
 class discussion extends Component {
   state = {};
+
+  pullData() {
+    var self = this;
+    axios({ method: "GET", url: "/api/discussion/all" }).then(function (
+      response
+    ) {
+      console.log(response);
+    });
+  }
+
   render() {
     return (
       <div>
@@ -32,11 +43,7 @@ class discussion extends Component {
               />
             </span>
           </div>
-          <div class="wrapper">
-            <DiscPost></DiscPost>
-            <DiscPost></DiscPost>
-            <DiscPost></DiscPost>
-          </div>
+          <div class="wrapper">{this.pullData()}</div>
           <ul class="pagination pagination-sm pagination-circle justify-content-center mb-0">
             <li class="page-item disabled">
               <span class="page-link has-icon">
