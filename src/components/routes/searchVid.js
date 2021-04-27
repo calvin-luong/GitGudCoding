@@ -8,6 +8,7 @@ class searchVid extends Component {
   state = {
     result: [],
   };
+
   constructor(props) {
     super(props);
     this.onSearch = this.onSearch.bind(this);
