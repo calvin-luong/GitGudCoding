@@ -1,0 +1,17 @@
+@import '~bootstrap/scss/bootstrap.scss';
+.videoListContainer {
+   width: 100%;
+   height: 100%;
+   padding: 60px;
+   display: grid;
+   place-items: center;
+}
+
+.row {
+   margin: 0 !important;
+   padding: 10px;
+}
+
+.column {
+   padding: 10px;
+}

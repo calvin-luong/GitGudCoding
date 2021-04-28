@@ -1,8 +1,9 @@
+
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
 class video extends Component {
-  state = {};
+   state = {};
 
   constructor(props) {
     super(props);
@@ -21,8 +22,8 @@ class video extends Component {
     return (
       <div>
         <iframe
-          width="560"
-          height="315"
+          width="100%"
+          height="100%"
           src={urlString}
           title="YouTube video player"
           frameborder="0"
