@@ -4,8 +4,8 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import SignIn from "./components/routes/signin";
 import SignUp from "./components/routes/signup";
-import SearchVid from "./components/routes/searchVid";
-import Landing from "./components/landing";
+import SearchVid from "./components/routes/videos";
+import Landing from "./components/routes/landing";
 import Discussion from "./components/routes/discussion";
 import Post from "./components/routes/post";
 import CreatePost from "./components/routes/createPost";
@@ -20,10 +20,10 @@ function App() {
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route path="/searchVid" component={SearchVid} />
-              <Route path="/login" component={SignIn} />
+              <Route path="/sign-in" component={SignIn} />
               <Route path="/sign-up" component={SignUp} />
               <Route path="/discussion" component={Discussion} />
-              <Route path="/post" component={Post} />
+              <Route path="/post/:id" component={Post} />
               <Route path="/create-post" component={CreatePost} />
               <Route path="/create-post-video" component={CreatePostWVideo} />
             </Switch>

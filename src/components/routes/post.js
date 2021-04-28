@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NavBar from "./navbar";
+import NavBar from "../app/navbar";
 
 class post extends Component {
   state = {};

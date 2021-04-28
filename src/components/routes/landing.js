@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NavBar from "./routes/navbar";
+import NavBar from "../app/navbar";
 
 class landing extends Component {
   state = {};

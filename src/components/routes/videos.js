@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
-import VideoList from "./videoList";
+import VideoList from "../app/videos/videoList";
 import $ from "jquery";
-import NavBar from "./navbar";
+import NavBar from "../app/navbar";
 
 class searchVid extends Component {
   state = {
     result: [],
   };
+
   constructor(props) {
     super(props);
     this.onSearch = this.onSearch.bind(this);

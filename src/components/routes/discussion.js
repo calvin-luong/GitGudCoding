@@ -1,9 +1,42 @@
 import React, { Component } from "react";
-import NavBar from "./navbar";
-import DiscPost from "./discpost";
+import NavBar from "../app/navbar";
+import axios from "axios";
+import DiscPost from "../app/discussions/discpost";
+import DiscussionList from "../app/discussions/discussionList";
 
 class discussion extends Component {
-  state = {};
+  state = {
+    result: [],
+  };
+
+  constructor(props) {
+    super(props);
+    this.pullData = this.pullData.bind(this);
+  }
+
+  pullData() {
+    var self = this;
+
+    axios({ method: "GET", url: "/api/discussion/all" })
+      .then(function (response) {
+        console.log(response + " this");
+        var ids = [];
+
+        for (let i = 0; i < 2; i++) {
+          ids.push({
+            id: 1,
+          });
+        }
+
+        self.setState((state) => ({
+          result: ids,
+        }));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   render() {
     return (
       <div>
@@ -33,9 +66,8 @@ class discussion extends Component {
             </span>
           </div>
           <div class="wrapper">
-            <DiscPost></DiscPost>
-            <DiscPost></DiscPost>
-            <DiscPost></DiscPost>
+            {this.pullData()}
+            <DiscussionList result={this.state.result}></DiscussionList>
           </div>
           <ul class="pagination pagination-sm pagination-circle justify-content-center mb-0">
             <li class="page-item disabled">
