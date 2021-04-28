@@ -4,8 +4,8 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import SignIn from "./components/routes/signin";
 import SignUp from "./components/routes/signup";
-import SearchVid from "./components/routes/searchVid";
-import Landing from "./components/landing";
+import SearchVid from "./components/routes/videos";
+import Landing from "./components/routes/landing";
 import Discussion from "./components/routes/discussion";
 import Post from "./components/routes/post";
 import CreatePost from "./components/routes/createPost";

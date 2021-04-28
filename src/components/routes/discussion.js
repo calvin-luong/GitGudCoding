@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import NavBar from "./navbar";
+import NavBar from "../app/navbar";
 import axios from "axios";
-import DiscPost from "./discpost";
-import DiscussionList from "./discussionList";
+import DiscPost from "../app/discussions/discpost";
+import DiscussionList from "../app/discussions/discussionList";
 
 class discussion extends Component {
   state = {
