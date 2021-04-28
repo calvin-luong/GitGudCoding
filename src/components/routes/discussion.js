@@ -19,12 +19,16 @@ class discussion extends Component {
 
     axios({ method: "GET", url: "/api/discussion/all" })
       .then(function (response) {
-        console.log(response + " this");
+        console.log(response.data[0].title + " this");
         var ids = [];
 
         for (let i = 0; i < 2; i++) {
           ids.push({
-            id: 1,
+            id: response.data[i]._id,
+            title: response.data[i].title,
+            description: response.data[i].description,
+            creator: response.data[i].creator,
+            createdAt: response.data[i].createdAt,
           });
         }
 

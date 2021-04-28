@@ -15,24 +15,19 @@ class post extends Component {
             */}
             <div class="row">
               <div class="col-lg-8">
-                <h1 class="mt-4">Post Title</h1>
+                <h1 class="mt-4">{this.props.location.state.title}</h1>
                 <p class="lead">
                   by
-                  <a href="#"> Start Bootstrap</a>
+                  <a href="#"> {this.props.location.state.creator}</a>
                 </p>
 
                 <hr />
 
-                <p>Posted on January 1, 2019 at 12:00 PM</p>
+                <p>Posted on {this.props.location.state.createdAt}</p>
 
                 <hr />
 
-                <p class="lead">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe
-                  quibusdam sit excepturi nam quia corporis eligendi eos magni
-                  recusandae laborum minus inventore?
-                </p>
+                <p class="lead">{this.props.location.state.description}</p>
 
                 <hr />
 

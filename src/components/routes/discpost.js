@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class DiscPost extends Component {
   render() {
@@ -18,15 +19,27 @@ class DiscPost extends Component {
               </a>
               <div class="media-body">
                 <h6>
-                  <Link to={`/post/${this.props.id}`}>Post Title</Link>
+                  <Link
+                    to={{
+                      pathname: `/post/${this.props.id}`,
+                      state: {
+                        title: this.props.title,
+                        description: this.props.description,
+                        creator: this.props.creator,
+                        createdAt: this.props.createdAt,
+                      },
+                    }}
+                  >
+                    {this.props.title}
+                  </Link>
                 </h6>
-                <p class="text-secondary">Body Body Body Body</p>
+                <p class="text-secondary">{this.props.description}</p>
               </div>
               <div class="float-right">
                 <p class="text-muted">
-                  <a href="#">Poster Name</a> posted{" "}
+                  <a href="#">{this.props.creator}</a> {"posted "}
                   <span class="text-secondary font-weight-bold">
-                    (Time ago)
+                    {this.props.createdAt}
                   </span>
                 </p>
               </div>
@@ -38,4 +51,4 @@ class DiscPost extends Component {
   }
 }
 
-export default DiscPost;
+export default withRouter(DiscPost);
