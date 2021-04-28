@@ -7,16 +7,14 @@ import "../../styles/signin.scss";
 export default class SignIn extends Component {
   render() {
     return (
-      <Container fluid>
-        <Row>
-          <Col>
-            <SignUpSignInCard />
-          </Col>
-          <Col>
-            <SignInForm />
-          </Col>
-        </Row>
-      </Container>
+      <Row>
+        <Col>
+          <SignUpSignInCard />
+        </Col>
+        <Col>
+          <SignInForm />
+        </Col>
+      </Row>
     );
   }
 }
