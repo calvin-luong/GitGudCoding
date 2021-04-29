@@ -1,0 +1,10 @@
+export { default as Login } from './login';
+export { default as SignUp } from './signup';
+export { default as SearchVid } from './searchVid';
+export { default as Discussion } from './discussion';
+export { default as Post } from './post';
+export { default as CreatePost } from './createPost';
+export { default as CreatePostWVideo } from './createPostWithVideo';
+export { default as Landing } from './landing';
+export { default as PrivateRoute } from './privateRoute';
+export { default as NavBar } from './navbar';

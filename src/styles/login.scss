@@ -1,15 +1,5 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
-body,
-html {
-   height: 100%;
-}
-
-.signup {
-   width: 100%;
-   height: 100%;
-}
-
 html,
 .App,
 #root,
@@ -20,10 +10,10 @@ html,
 .col {
    width: 100%;
    height: 100%;
-   padding: 0;
+   padding: 0 !important;
 }
 
-.signup-signin-card {
+.login-signup-card {
    width: 100%;
    height: 100%;
 }
