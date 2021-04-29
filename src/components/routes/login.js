@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import SignUpSignInCard from './admin/signin-singup-card';
-import SignInForm from './admin/signin-form';
-import '../../styles/signin.scss';
+import LoginSignUpCard from './admin/login-singup-card';
+import LoginForm from './admin/login-form';
+import '../../styles/login.scss';
 
-export default class SignIn extends Component {
+export default class Login extends Component {
    render() {
       return (
          <Container fluid>
             <Row>
                <Col>
-                  <SignUpSignInCard />
+                  <LoginSignUpCard />
                </Col>
                <Col>
-                  <SignInForm />
+                  <LoginForm />
                </Col>
             </Row>
          </Container>

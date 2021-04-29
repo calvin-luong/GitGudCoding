@@ -35,8 +35,8 @@ const NavBar = () => {
          <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
             <ul class="navbar-nav ml-auto">
                <li class="nav-item">
-                  <a class="nav-link" href="/login">
-                     Sign In
+                  <a class="nav-link" href="localhost:5000/auth/logout">
+                     Log out
                   </a>
                </li>
                <li class="nav-item">
