@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import NavBar from "./navbar";
-import DiscPost from "./discpost";
+import NavBar from "../app/admin/navbar";
+import DiscPost from "../app/posts/discpost";
 
 class discussion extends Component {
   state = {};

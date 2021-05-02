@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NavBar from "./navbar";
+import NavBar from "../app/admin/navbar";
 import "../../styles/createPost.scss";
 import Swal from "sweetalert2";
 
