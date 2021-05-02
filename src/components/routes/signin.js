@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import LoginSignUpCard from "../app/admin/login-singup-card";
-import SignUpForm from "../app/admin/signup-form";
-import "../../styles/signup.scss";
+import LoginForm from "../app/admin/login-form";
+import "../../styles/login.scss";
 
-export default class SignUp extends Component {
+export default class Login extends Component {
   render() {
     return (
       <Container fluid>
@@ -13,7 +13,7 @@ export default class SignUp extends Component {
             <LoginSignUpCard />
           </Col>
           <Col>
-            <SignUpForm />
+            <LoginForm />
           </Col>
         </Row>
       </Container>
