@@ -20,10 +20,10 @@ function App() {
         <div className="auth-wrapper">
           <div className="auth-inner">
             <Switch>
-              <Route exact path="/" component={Signin} />
+              <Route exact path="/" component={Landing} />
               <Route path="/sign-in" component={Signin} />
               <Route path="/sign-up" component={SignUp} />
-              <PrivateRoute path="/searchVid" component={SearchVid} />
+              <Route path="/searchVid" component={SearchVid} />
               <PrivateRoute path="/discussion" component={Discussion} />
               <PrivateRoute path="/post" component={Post} />
               <PrivateRoute path="/create-post" component={CreatePost} />

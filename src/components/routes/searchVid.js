@@ -16,6 +16,7 @@ class searchVid extends Component {
   onSearch() {
     var input = $("#searchInput").val();
     var self = this;
+
     self.setState((state) => ({
       result: [],
     }));
