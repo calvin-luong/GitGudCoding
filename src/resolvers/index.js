@@ -26,7 +26,7 @@ export {
   deleteThread,
 } from "./threads";
 export {
-  getPostyId,
+  getPostById,
   getPostsByThreadId,
   createPost,
   updatePost,

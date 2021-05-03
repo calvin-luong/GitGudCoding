@@ -2,7 +2,7 @@ import axios from "axios";
 /**
  * @param {String} id of the Post you want
  */
-export async function getPostyId(id) {
+export async function getPostById(id) {
   const user = await axios({
     method: "GET",
     url: "/api/posts/" + id,
