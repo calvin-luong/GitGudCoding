@@ -1,5 +1,8 @@
 import axios from "axios";
 
+/**
+ * Returns all Leetcode Problems
+ */
 export async function getAllLeetcode() {
   const user = await axios({
     method: "GET",
@@ -13,6 +16,10 @@ export async function getAllLeetcode() {
     });
   return user;
 }
+/**
+ * NOTE THIS IS THE TITLE-SLUG ATTRIBUTE
+ * @param {String} title of the question you want
+ */
 export async function getLeetcodeQuestion(title) {
   const user = await axios({
     method: "GET",

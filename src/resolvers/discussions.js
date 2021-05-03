@@ -1,5 +1,7 @@
 import axios from "axios";
-
+/**
+ * Returns All Discussions in Database
+ */
 export async function getAllDiscussions() {
   const user = await axios({
     method: "GET",
@@ -13,7 +15,10 @@ export async function getAllDiscussions() {
     });
   return user;
 }
-
+/**
+ * @param {String} id of a Discussion
+ * Discussion
+ */
 export async function getDiscussionById(id) {
   const user = await axios({
     method: "GET",
@@ -27,6 +32,9 @@ export async function getDiscussionById(id) {
     });
   return user;
 }
+/**
+ * @param {String} topic for the discussion you are looking for
+ */
 export async function getDiscussionsByTopic(topic) {
   const user = await axios({
     method: "GET",
@@ -40,6 +48,9 @@ export async function getDiscussionsByTopic(topic) {
     });
   return user;
 }
+/**
+ * @param {String} title  for the discussion you are looking for
+ */
 export async function getDiscussionsByTitle(title) {
   const user = await axios({
     method: "GET",
@@ -53,6 +64,16 @@ export async function getDiscussionsByTitle(title) {
     });
   return user;
 }
+/**
+ * 
+ * @param {Discussion} body 
+ * Must Be Signed In
+ * Example: {
+            "title": "Title1",
+            "description": "Description1",
+            "topics": ["Test"]
+          }
+ */
 export async function createDiscussion(body) {
   const user = await axios({
     method: "POST",
@@ -67,6 +88,16 @@ export async function createDiscussion(body) {
     });
   return user;
 }
+/**
+ *
+ * @param {String} id for the discussion you want to edit
+ * @param {Discussion} body pass in the new discussion
+ * Example: {
+            "title": "Title1",
+            "description": "Description1",
+            "topics": ["Test"]
+          }
+ */
 export async function updateDiscussion(id, body) {
   const user = await axios({
     method: "PATCH",
@@ -81,7 +112,9 @@ export async function updateDiscussion(id, body) {
     });
   return user;
 }
-
+/**
+ * @param {String} id for the discussion you want to delete
+ */
 export async function deleteDiscussion(id) {
   const user = await axios({
     method: "DELETE",

@@ -1,5 +1,7 @@
 import axios from "axios";
-
+/**
+ * @param {String} id of the Post you want
+ */
 export async function getPostyId(id) {
   const user = await axios({
     method: "GET",
@@ -13,6 +15,9 @@ export async function getPostyId(id) {
     });
   return user;
 }
+/**
+ * @param {String} id of the Thread that you want all the comments for
+ */
 export async function getPostsByThreadId(id) {
   const user = await axios({
     method: "GET",
@@ -26,7 +31,18 @@ export async function getPostsByThreadId(id) {
     });
   return user;
 }
-
+/**
+ * 
+ * @param {Post} body 
+ * threadId = Id of the thread someone commented on 
+ * creator = the persons id of who is writing this
+ * Must Be Signed In
+ * Example: {
+                "threadId":"608df97fbbbfb9d7b4a81680", 
+                "creator":"6076a02675e7cf6b5a10afd5",
+                "text":"Hi hihihihojjojoododojssos"
+          }
+ */
 export async function createPost(body) {
   const user = await axios({
     method: "POST",
@@ -41,6 +57,19 @@ export async function createPost(body) {
     });
   return user;
 }
+/**
+ *
+ * @param {String} id for the post you want to edit
+ * @param {Post} body 
+ * threadId = Id of the thread someone commented on 
+ * creator = the persons id of who is writing this
+ * Must Be Signed In
+ * Example: {
+                "threadId":"608df97fbbbfb9d7b4a81680", 
+                "creator":"6076a02675e7cf6b5a10afd5",
+                "text":"Hi hihihihojjojoododojssos"
+          }
+ */
 export async function updatePost(id, body) {
   const user = await axios({
     method: "PATCH",
@@ -55,7 +84,10 @@ export async function updatePost(id, body) {
     });
   return user;
 }
-
+/**
+ *
+ * @param {String} id for the post you want to delete
+ */
 export async function deletePost(id) {
   const user = await axios({
     method: "DELETE",
