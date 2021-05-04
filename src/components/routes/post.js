@@ -1,38 +1,95 @@
 import React, { Component } from "react";
 import NavBar from "../app/admin/navbar";
+import Swal from "sweetalert2";
+import threads from "../../resolvers/threads";
+import axios from "axios";
+import Comment from "../app/posts/comment";
 
 class post extends Component {
-  state = {};
+  state = { result: [] };
+
+  constructor(props) {
+    super(props);
+    this.pullComments = this.pullComments.bind(this);
+  }
+
+  pullComments() {
+    var self = this;
+
+    axios({
+      method: "GET",
+      url: "/api/threads/forum/" + this.props.location.state.id,
+    })
+      .then(function (response) {
+        var ids = [];
+
+        for (let i = 0; i < response.data.length; i++) {
+          ids.push({
+            creator: response.data[i].creator,
+            text: response.data[i].text,
+          });
+        }
+
+        self.setState((state) => ({
+          result: ids,
+        }));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  submitComment = (e) => {
+    e.preventDefault();
+
+    var comment = document.getElementById("comment").value;
+
+    if (comment == 0) {
+      Swal.fire({ icon: "error", text: "Comment field is empty" });
+    } else {
+      axios({
+        method: "POST",
+        url: "/api/threads/create",
+        data: {
+          forumId: this.props.location.state.id,
+          creator: this.props.location.state.creator,
+          text: comment,
+        },
+      }).then(
+        (response) => {
+          console.log(response.data);
+        },
+        (error) => {
+          console.log(error.request.response);
+        }
+      );
+    }
+  };
+
   render() {
     return (
       <div>
         <NavBar></NavBar>
-
         <body>
           <div class="container">
             {/* 
             Post 
             */}
-            <div class="row">
+            <div>
               <div class="col-lg-8">
-                <h1 class="mt-4">Post Title</h1>
+                <h1 class="mt-4">{this.props.location.state.title}</h1>
                 <p class="lead">
                   by
-                  <a href="#"> Start Bootstrap</a>
+                  <a href="#"> {this.props.location.state.creator}</a>
                 </p>
 
                 <hr />
 
-                <p>Posted on January 1, 2019 at 12:00 PM</p>
+                <p>Posted on {this.props.location.state.createdAt}</p>
 
                 <hr />
 
-                <p class="lead">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe
-                  quibusdam sit excepturi nam quia corporis eligendi eos magni
-                  recusandae laborum minus inventore?
-                </p>
+                <p class="lead">{this.props.location.state.description}</p>
 
                 <hr />
 
@@ -42,39 +99,28 @@ class post extends Component {
                   <div class="card-body">
                     <form>
                       <div class="form-group">
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea
+                          class="form-control"
+                          rows="3"
+                          id="comment"
+                        ></textarea>
                       </div>
-                      <button type="submit" class="btn btn-primary">
+                      <a
+                        role="button"
+                        class="btn btn-primary"
+                        onClick={this.submitComment}
+                      >
                         Submit
-                      </button>
+                      </a>
                     </form>
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* 
-            Comment Section 
-            */}
-            <div class="media mb-4">
-              <img
-                class="d-flex mr-3 rounded-circle"
-                src="http://placehold.it/50x50"
-                alt=""
-              />
-
-              {/* 
-                Comment Section 
-              */}
-              <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-                nisi vulputate fringilla. Donec lacinia congue felis in
-                faucibus.
-              </div>
-            </div>
+            {this.pullComments()}
+            {this.state.result.map((commentInfo) => (
+              <Comment creator={commentInfo.creator} text={commentInfo.text} />
+            ))}
           </div>
         </body>
       </div>

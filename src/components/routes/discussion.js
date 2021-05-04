@@ -1,9 +1,45 @@
 import React, { Component } from "react";
 import NavBar from "../app/admin/navbar";
 import DiscPost from "../app/posts/discpost";
+import axios from "axios";
+import DiscussionList from "../app/posts/discussionList";
 
 class discussion extends Component {
-  state = {};
+  state = {
+    result: [],
+  };
+
+  constructor(props) {
+    super(props);
+    this.pullData = this.pullData.bind(this);
+  }
+
+  pullData() {
+    var self = this;
+
+    axios({ method: "GET", url: "/api/discussions/all" })
+      .then(function (response) {
+        var ids = [];
+
+        for (let i = 0; i < response.data.length; i++) {
+          ids.push({
+            id: response.data[i]._id,
+            title: response.data[i].title,
+            description: response.data[i].description,
+            creator: response.data[i].creator,
+            createdAt: response.data[i].createdAt,
+          });
+        }
+
+        self.setState((state) => ({
+          result: ids,
+        }));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   render() {
     return (
       <div>
@@ -33,9 +69,8 @@ class discussion extends Component {
             </span>
           </div>
           <div class="wrapper">
-            <DiscPost></DiscPost>
-            <DiscPost></DiscPost>
-            <DiscPost></DiscPost>
+            {this.pullData()}
+            <DiscussionList result={this.state.result}></DiscussionList>
           </div>
           <ul class="pagination pagination-sm pagination-circle justify-content-center mb-0">
             <li class="page-item disabled">

@@ -24,13 +24,10 @@ function App() {
               <Route path="/sign-in" component={Signin} />
               <Route path="/sign-up" component={SignUp} />
               <Route path="/searchVid" component={SearchVid} />
-              <PrivateRoute path="/discussion" component={Discussion} />
-              <PrivateRoute path="/post" component={Post} />
-              <PrivateRoute path="/create-post" component={CreatePost} />
-              <PrivateRoute
-                path="/create-post-video"
-                component={CreatePostWVideo}
-              />
+              <Route path="/discussion" component={Discussion} />
+              <Route path="/post" component={Post} />
+              <Route path="/create-post" component={CreatePost} />
+              <Route path="/create-post-video" component={CreatePostWVideo} />
             </Switch>
           </div>
         </div>
