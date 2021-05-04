@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import NavBar from "../app/admin/navbar";
 import "../../styles/createPost.scss";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 class createPost extends Component {
   state = {
@@ -26,6 +27,29 @@ class createPost extends Component {
         icon: "error",
         text: "Description character Limit Exceeded",
       });
+    } else {
+      var titleBox = document.getElementById("titleInput").value;
+      var descriptionBox = document.getElementById("descriptionInput").value;
+
+      axios({
+        method: "POST",
+        url: "/api/discussions/create/",
+        data: {
+          title: titleBox,
+          description: descriptionBox,
+          topics: ["xd"],
+        },
+      }).then(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.log(error + "this is an error");
+        }
+      );
+
+      console.log(titleBox + descriptionBox);
+      this.props.history.push("/discussion");
     }
   };
 
@@ -48,8 +72,10 @@ class createPost extends Component {
                     type="text"
                     class="form-control"
                     name="title"
+                    id="titleInput"
                     value={this.state.content}
                     onChange={this.handleOnChange}
+                    required
                   />
                   <small>
                     Remaining Characters:{" "}
@@ -65,8 +91,10 @@ class createPost extends Component {
                     rows="20"
                     class="form-control"
                     name="description"
+                    id="descriptionInput"
                     value={this.state.content}
                     onChange={this.handleOnChange}
+                    required
                   ></textarea>
                   <small>
                     Remaining Characters:{" "}
