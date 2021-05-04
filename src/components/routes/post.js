@@ -1,21 +1,30 @@
 import React, { Component } from "react";
 import NavBar from "../app/admin/navbar";
 import Swal from "sweetalert2";
-import threads from "../../resolvers/threads";
+import { getUserFullInfo, threads } from "../../resolvers";
 import axios from "axios";
 import Comment from "../app/posts/comment";
 
 class post extends Component {
-  state = { result: [] };
+  state = { result: [], username: [] };
 
   constructor(props) {
     super(props);
     this.pullComments = this.pullComments.bind(this);
+    this.getName = this.getName.bind(this);
+  }
+
+  async getName() {
+    var self = this;
+    const userinfo = await getUserFullInfo();
+
+    this.setState((state) => ({
+      username: userinfo,
+    }));
   }
 
   pullComments() {
     var self = this;
-
     axios({
       method: "GET",
       url: "/api/threads/forum/" + this.props.location.state.id,
@@ -39,8 +48,12 @@ class post extends Component {
       });
   }
 
-  submitComment = (e) => {
-    e.preventDefault();
+  async submitComment() {
+    var self = this;
+
+    var self = this;
+    await getName();
+    console.log(this.state.username);
 
     var comment = document.getElementById("comment").value;
 
@@ -52,7 +65,7 @@ class post extends Component {
         url: "/api/threads/create",
         data: {
           forumId: this.props.location.state.id,
-          creator: this.props.location.state.creator,
+          creator: this.props.location.creator,
           text: comment,
         },
       }).then(
@@ -64,7 +77,7 @@ class post extends Component {
         }
       );
     }
-  };
+  }
 
   render() {
     return (
