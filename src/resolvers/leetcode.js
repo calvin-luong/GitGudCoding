@@ -42,7 +42,7 @@ export async function getLeetcodeQuestionByTopic(num, topic) {
   const allQuestions = await getAllLeetcode();
   const newQuestions = [];
 
-  for (var i = 0; i < num; i++) {
+  for (var i = 0; i < 50 && newQuestions.length < num; i++) {
     var questionFound = await getLeetcodeQuestion(
       allQuestions.allProblems[i].questionTitleSlug
     );
