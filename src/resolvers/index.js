@@ -32,4 +32,8 @@ export {
   updatePost,
   deletePost,
 } from "./posts";
-export { getAllLeetcode, getLeetcodeQuestion } from "./leetcode";
+export {
+  getAllLeetcode,
+  getLeetcodeQuestion,
+  getLeetcodeQuestionByTopic,
+} from "./leetcode";

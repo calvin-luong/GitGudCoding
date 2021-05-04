@@ -33,3 +33,27 @@ export async function getLeetcodeQuestion(title) {
     });
   return user;
 }
+
+/**
+ * NOTE THIS IS THE TITLE-SLUG ATTRIBUTE
+ * @param {String} title of the question you want
+ */
+export async function getLeetcodeQuestionByTopic(num, topic) {
+  const allQuestions = await getAllLeetcode();
+  const newQuestions = [];
+
+  for (var i = 0; i < num; i++) {
+    var questionFound = await getLeetcodeQuestion(
+      allQuestions.allProblems[i].questionTitleSlug
+    );
+
+    if (
+      questionFound.allProblems.topicTags.find((a) =>
+        a.toLowerCase().includes(topic.toLowerCase())
+      )
+    ) {
+      newQuestions.push(questionFound);
+    }
+  }
+  return newQuestions;
+}
