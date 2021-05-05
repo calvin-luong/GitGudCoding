@@ -3,6 +3,7 @@ import NavBar from "../app/admin/navbar";
 import "../../styles/createPost.scss";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { getUserFullInfo } from "../../resolvers";
 
 class createPost extends Component {
   state = {
@@ -10,14 +11,33 @@ class createPost extends Component {
     titleCharLimit: 100,
     description: "",
     descriptionCharLimit: 500,
+    username: [],
   };
+
+  constructor(props) {
+    super(props);
+    this.getName = this.getName.bind(this);
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
+  }
+
+  async getName() {
+    var self = this;
+    const userinfo = await getUserFullInfo();
+
+    this.setState((state) => ({
+      username: userinfo,
+    }));
+    console.log(userinfo);
+  }
 
   handleOnChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleOnSubmit = (e) => {
+  handleOnSubmit = async (e) => {
     e.preventDefault();
+    await this.getName();
+
     if (this.state.title.length > this.state.titleCharLimit) {
       Swal.fire({ icon: "error", text: "Title character Limit Exceeded" });
     } else if (
@@ -37,7 +57,12 @@ class createPost extends Component {
         data: {
           title: titleBox,
           description: descriptionBox,
-          topics: ["xd"],
+          topics: [],
+          creator:
+            this.state.username.first_name +
+            " " +
+            this.state.username.last_name,
+          topics: this.state.username.image,
         },
       }).then(
         (response) => {

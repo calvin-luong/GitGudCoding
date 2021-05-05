@@ -3,6 +3,7 @@ import NavBar from "../app/admin/navbar";
 import DiscPost from "../app/posts/discpost";
 import axios from "axios";
 import DiscussionList from "../app/posts/discussionList";
+import moment from "moment";
 
 class discussion extends Component {
   state = {
@@ -27,7 +28,14 @@ class discussion extends Component {
             title: response.data[i].title,
             description: response.data[i].description,
             creator: response.data[i].creator,
-            createdAt: response.data[i].createdAt,
+            createdAt: moment(
+              new Date(
+                response.data[i].createdAt.substring(0, 4),
+                response.data[i].createdAt.substring(5, 7),
+                response.data[i].createdAt.substring(8, 9)
+              )
+            ).format("MMMM D, Y"),
+            image: response.data[i].topics[0],
           });
         }
 

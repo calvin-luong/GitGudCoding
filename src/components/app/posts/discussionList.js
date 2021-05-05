@@ -13,6 +13,7 @@ class discussionList extends Component {
             description={postInfo.description}
             creator={postInfo.creator}
             createdAt={postInfo.createdAt}
+            image={postInfo.image}
           />
         ))}
       </div>

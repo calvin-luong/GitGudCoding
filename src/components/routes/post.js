@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NavBar from "../app/admin/navbar";
 import Swal from "sweetalert2";
-import { getUserFullInfo, threads } from "../../resolvers";
+import { getUserFullInfo } from "../../resolvers";
 import axios from "axios";
 import Comment from "../app/posts/comment";
 
@@ -12,6 +12,7 @@ class post extends Component {
     super(props);
     this.pullComments = this.pullComments.bind(this);
     this.getName = this.getName.bind(this);
+    this.submitComment = this.submitComment.bind(this);
   }
 
   async getName() {
@@ -21,6 +22,7 @@ class post extends Component {
     this.setState((state) => ({
       username: userinfo,
     }));
+    console.log(userinfo);
   }
 
   pullComments() {
@@ -48,12 +50,9 @@ class post extends Component {
       });
   }
 
-  async submitComment() {
-    var self = this;
-
-    var self = this;
-    await getName();
-    console.log(this.state.username);
+  submitComment = async (e) => {
+    e.preventDefault();
+    await this.getName();
 
     var comment = document.getElementById("comment").value;
 
@@ -65,8 +64,11 @@ class post extends Component {
         url: "/api/threads/create",
         data: {
           forumId: this.props.location.state.id,
-          creator: this.props.location.creator,
-          text: comment,
+          creator:
+            this.state.username.first_name +
+            " " +
+            this.state.username.last_name,
+          text: this.state.username.image + "imagespacer@" + comment,
         },
       }).then(
         (response) => {
@@ -77,7 +79,7 @@ class post extends Component {
         }
       );
     }
-  }
+  };
 
   render() {
     return (
@@ -132,7 +134,16 @@ class post extends Component {
             </div>
             {this.pullComments()}
             {this.state.result.map((commentInfo) => (
-              <Comment creator={commentInfo.creator} text={commentInfo.text} />
+              <Comment
+                creator={commentInfo.creator}
+                text={commentInfo.text.substring(
+                  commentInfo.text.indexOf("imagespacer@") + 12
+                )}
+                image={commentInfo.text.substring(
+                  0,
+                  commentInfo.text.indexOf("imagespacer@")
+                )}
+              />
             ))}
           </div>
         </body>
