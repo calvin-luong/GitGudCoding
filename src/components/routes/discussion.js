@@ -31,8 +31,8 @@ class discussion extends Component {
             createdAt: moment(
               new Date(
                 response.data[i].createdAt.substring(0, 4),
-                response.data[i].createdAt.substring(5, 7),
-                response.data[i].createdAt.substring(8, 9)
+                response.data[i].createdAt.substring(5, 7) - 1,
+                response.data[i].createdAt.substring(8, 10)
               )
             ).format("MMMM D, Y"),
             image: response.data[i].topics[0],
