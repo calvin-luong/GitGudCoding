@@ -13,6 +13,7 @@ import {
   PrivateRoute,
   SearchQuestions,
 } from "./components/index";
+import { getIsAuthenticated } from "../src/resolvers";
 
 function App() {
   return (
@@ -21,9 +22,15 @@ function App() {
         <div className="auth-wrapper">
           <div className="auth-inner">
             <Switch>
-              <Route exact path="/" component={Landing} />
+              {getIsAuthenticated() ? (
+                <Route exact path="/" component={Landing} />
+              ) : (
+                <Route exact path="/" component={Signin} />
+              )}
+              <Route exact path="/" component={Signin} />
               <Route path="/sign-in" component={Signin} />
               <Route path="/sign-up" component={SignUp} />
+              <PrivateRoute path="/landing" component={Landing} />
               <PrivateRoute path="/searchVid" component={SearchVid} />
               <PrivateRoute path="/discussion" component={Discussion} />
               <PrivateRoute path="/post" component={Post} />

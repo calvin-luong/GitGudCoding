@@ -1,3 +1,4 @@
+export { getIsAuthenticated } from "./auth";
 export {
   getUserFullInfo,
   getUserPostsAndComments,
