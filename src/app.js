@@ -24,11 +24,14 @@ function App() {
               <Route exact path="/" component={Landing} />
               <Route path="/sign-in" component={Signin} />
               <Route path="/sign-up" component={SignUp} />
-              <Route path="/searchVid" component={SearchVid} />
+              <PrivateRoute path="/searchVid" component={SearchVid} />
               <PrivateRoute path="/discussion" component={Discussion} />
               <PrivateRoute path="/post" component={Post} />
               <PrivateRoute path="/create-post" component={CreatePost} />
-              <Route path="/searchQuestions" component={SearchQuestions} />
+              <PrivateRoute
+                path="/searchQuestions"
+                component={SearchQuestions}
+              />
               <PrivateRoute
                 path="/create-post-video"
                 component={CreatePostWVideo}

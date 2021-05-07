@@ -3,32 +3,29 @@ import axios from "axios";
 import { Redirect, Route } from "react-router-dom";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const [isUserLoggedIn, setUserIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const apiUrl = "localhost:5000/api/auth/check";
+  async function isUserLoggedIn() {
+    var loggedIn = false;
+    const apiUrl = "/api/auth/check";
     axios
       .get(apiUrl)
       .then(function (response) {
-        console.log(response);
-        setUserIsLoggedIn(response);
+        console.log("authenticated? " + response.data.authenticated);
+        if (response.data.authenticated === true) {
+          loggedIn = true;
+        }
+        console.log(loggedIn);
+        return loggedIn;
       })
       .catch(function (error) {
-        console.log(error);
+        console.log("PrivateRoute error: " + error);
       });
-  }, []);
+  }
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        isUserLoggedIn ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{ pathname: "/sign-in", state: { from: props.location } }}
-          />
-        )
+        isUserLoggedIn() ? <Component {...props} /> : <Redirect to="/sign-in" />
       }
     />
   );
