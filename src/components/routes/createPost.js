@@ -58,7 +58,8 @@ class createPost extends Component {
           title: titleBox,
           description: descriptionBox,
           topics: [],
-          creator:
+          creator: this.state.username._id,
+          creatorName:
             this.state.username.first_name +
             " " +
             this.state.username.last_name,

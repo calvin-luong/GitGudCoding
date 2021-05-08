@@ -27,7 +27,7 @@ class discussion extends Component {
             id: response.data[i]._id,
             title: response.data[i].title,
             description: response.data[i].description,
-            creator: response.data[i].creator,
+            creator: response.data[i].creatorName,
             createdAt: moment(
               new Date(
                 response.data[i].createdAt.substring(0, 4),
