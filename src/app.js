@@ -11,6 +11,7 @@ import {
   CreatePostWVideo,
   Landing,
   PrivateRoute,
+  SearchQuestions,
 } from "./components/index";
 
 function App() {
@@ -23,11 +24,15 @@ function App() {
               <Route exact path="/" component={Landing} />
               <Route path="/sign-in" component={Signin} />
               <Route path="/sign-up" component={SignUp} />
-              <Route path="/searchVid" component={SearchVid} />
-              <Route path="/discussion" component={Discussion} />
+              <PrivateRoute path="/searchVid" component={SearchVid} />
+              <PrivateRoute path="/discussion" component={Discussion} />
               <Route path="/post" component={Post} />
               <Route path="/create-post" component={CreatePost} />
               <Route path="/create-post-video" component={CreatePostWVideo} />
+              <PrivateRoute
+                path="/searchQuestions"
+                component={SearchQuestions}
+              />
             </Switch>
           </div>
         </div>

@@ -53,7 +53,7 @@ class createPostWithVideo extends Component {
 
       axios({
         method: "POST",
-        url: "/api/discussion/create",
+        url: "/api/discussions/create",
         data: {
           title: titleBox,
           description: descriptionBox,
@@ -62,7 +62,7 @@ class createPostWithVideo extends Component {
             this.state.username.first_name +
             " " +
             this.state.username.last_name,
-          topics: this.state.username.image,
+          topics: [this.state.username.image],
         },
       }).then(
         (response) => {

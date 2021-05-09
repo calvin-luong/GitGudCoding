@@ -57,13 +57,12 @@ class createPost extends Component {
         data: {
           title: titleBox,
           description: descriptionBox,
-          topics: [],
           creator: this.state.username._id,
           creatorName:
             this.state.username.first_name +
             " " +
             this.state.username.last_name,
-          topics: this.state.username.image,
+          topics: [this.state.username.image],
         },
       }).then(
         (response) => {

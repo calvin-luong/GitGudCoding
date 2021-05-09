@@ -1,0 +1,17 @@
+.search-bar {
+  margin: 20px 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.form-control {
+  margin-right: 10px;
+  width: 50%;
+}
+
+.spinnerContainer {
+  padding: 50%;
+}

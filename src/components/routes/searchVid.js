@@ -51,10 +51,14 @@ class searchVid extends Component {
     return (
       <div>
         <NavBar />
-        <h1>Videos</h1>
         <div
           class="input-group"
-          style={{ width: "50%", marginLeft: "auto", marginRight: "auto" }}
+          style={{
+            width: "50%",
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: "20px",
+          }}
         >
           <input
             type="search"

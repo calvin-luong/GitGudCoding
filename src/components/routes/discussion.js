@@ -4,6 +4,7 @@ import axios from "axios";
 import DiscussionList from "../app/posts/discussionList";
 import moment from "moment";
 import { getDiscussionsByTitle } from "../../resolvers";
+import image from "../../../src/resources/monke.jpeg";
 
 class discussion extends Component {
   state = {
@@ -17,39 +18,34 @@ class discussion extends Component {
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
-  pullData() {
+  componentDidMount() {
     var self = this;
 
-    if (this.state.searched == false) {
-      axios({ method: "GET", url: "/api/discussions/all" })
-        .then(function (response) {
-          var ids = [];
+    axios({ method: "GET", url: "/api/discussions/all" })
+      .then(function (response) {
+        var ids = [];
 
-          for (let i = response.data.length - 1; i >= 0; i--) {
-            ids.push({
-              id: response.data[i]._id,
-              title: response.data[i].title,
-              description: response.data[i].description,
-              creator: response.data[i].creatorName,
-              createdAt: moment(
-                new Date(
-                  response.data[i].createdAt.substring(0, 4),
-                  response.data[i].createdAt.substring(5, 7) - 1,
-                  response.data[i].createdAt.substring(8, 10)
-                )
-              ).format("MMMM D, Y"),
-              image: response.data[i].topics[0],
-            });
-          }
+        for (let i = response.data.length - 1; i >= 0; i--) {
+          var date = new Date(response.data[i].create_date);
 
-          self.setState((state) => ({
-            result: ids,
-          }));
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
+          ids.push({
+            id: response.data[i]._id,
+            title: response.data[i].title,
+            description: response.data[i].description,
+            creator: response.data[i].creatorName,
+            image: response.data[i].topics[0],
+            createdAt: String(date).split("GMT")[0],
+          });
+        }
+        console.log(ids);
+
+        self.setState((state) => ({
+          result: ids,
+        }));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   handleOnSubmit = async (e) => {
@@ -125,7 +121,6 @@ class discussion extends Component {
             </span>
           </div>
           <div class="wrapper">
-            {this.pullData()}
             <DiscussionList result={this.state.result}></DiscussionList>
             {this.emptyArray()}
           </div>
