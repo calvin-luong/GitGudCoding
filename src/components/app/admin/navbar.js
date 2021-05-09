@@ -30,7 +30,10 @@ const NavBar = () => {
       <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/google/auth/logout">
+            <a
+              class="nav-link"
+              href="https://peaceful-dusk-16502.herokuapp.com/google/auth/logout"
+            >
               Log out
             </a>
           </li>

@@ -23,5 +23,6 @@ export default class SignUpForm extends Component {
 }
 
 function startGoogleAuth() {
-  window.location.href = "/google/auth";
+  window.location.href =
+    "https://peaceful-dusk-16502.herokuapp.com/google/auth";
 }
