@@ -39,9 +39,7 @@ class discussion extends Component {
         }
         console.log(ids);
 
-        self.setState((state) => ({
-          result: ids,
-        }));
+        self.setState({ ...self.state, result: ids });
       })
       .catch(function (error) {
         console.log(error);
@@ -56,33 +54,27 @@ class discussion extends Component {
     var searchField = document.getElementById("search").value;
     console.log(searchField);
 
-    if (searchField.length == 0) {
+    if (searchField.length === 0) {
       self.state.searched = false;
     } else {
       const searched = await getDiscussionsByTitle(searchField);
 
-      this.setState((state) => ({
-        searchedResult: searched,
-      }));
-
+      self.setState({ ...self.state, searchedResult: searched });
+      var total = [];
       for (let i = self.state.searchedResult.length - 1; i >= 0; i--) {
-        self.state.result.push({
+        var date = new Date(self.state.searchedResult[i].create_date);
+
+        total.push({
           id: self.state.searchedResult[i]._id,
           title: self.state.searchedResult[i].title,
           description: self.state.searchedResult[i].description,
           creator: self.state.searchedResult[i].creatorName,
-          createdAt: moment(
-            new Date(
-              self.state.searchedResult[i].createdAt.substring(0, 4),
-              self.state.searchedResult[i].createdAt.substring(5, 7) - 1,
-              self.state.searchedResult[i].createdAt.substring(8, 10)
-            )
-          ).format("MMMM D, Y"),
+          createdAt: String(date).split("GMT")[0],
           image: self.state.searchedResult[i].topics[0],
         });
       }
+      self.setState({ ...self.state, result: total });
     }
-    self.forceUpdate();
   };
 
   emptyArray() {
@@ -100,7 +92,7 @@ class discussion extends Component {
               class="btn btn-outline-secondary bg-gray-200 border-gray-200 shadow-none"
               href="/create-post"
             >
-              Create a Post
+              Start a Discussion
             </a>
             <select class="custom-select custom-select-sm w-auto mr-1 float-right">
               <option selected="">Latest</option>

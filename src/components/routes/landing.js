@@ -51,9 +51,7 @@ class landing extends Component {
             id: response.data.searchResults[i].id.videoId,
           });
         }
-        self.setState((state) => ({
-          video: result,
-        }));
+        self.setState({ ...self.state, video: result });
       })
       .catch(function (error) {
         console.log(error);
@@ -75,20 +73,33 @@ class landing extends Component {
           <VideoList result={this.state.video}></VideoList>
         </div>
       );
+    } else {
+      return (
+        <div style={{ textAlign: "center" }}>
+          {<h4 style={{ paddingTop: "20px" }}>Your posts</h4>}{" "}
+        </div>
+      );
     }
   }
-
+  isNotEmpty() {
+    if (this.state.result !== 0) {
+      return <VideoList result={this.state.video}></VideoList>;
+    }
+  }
   render() {
     return (
       <div>
         <NavBar></NavBar>
         <div>{this.isEmpty()}</div>
-
         <div class="container mt-4">
           <div class="wrapper">
             <DiscussionList result={this.state.result}></DiscussionList>
           </div>
         </div>
+        <div style={{ textAlign: "center" }}>
+          {<h4 style={{ paddingTop: "20px" }}>Suggested videos</h4>}{" "}
+        </div>
+        <div>{this.isNotEmpty()}</div>
       </div>
     );
   }

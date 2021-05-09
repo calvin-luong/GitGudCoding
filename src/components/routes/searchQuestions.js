@@ -223,7 +223,7 @@ const SearchQuestions = () => {
     <>
       <NavBar />
       {showSpinner && (
-        <div className="spinnerContainer" style={{ marginTop: "-400px" }}>
+        <div className="spinnerContainer">
           <div class="spinner-border text-secondary" role="status">
             <span class="sr-only">Loading...</span>
           </div>
@@ -261,10 +261,22 @@ const SearchQuestions = () => {
                 {showDefaultTable && <th>Difficulty</th>}
                 {!showDefaultTable && <th onClick={sortTitle}>Title</th>}
                 {!showDefaultTable && (
-                  <th onClick={sortDifficulty}>Difficulty</th>
+                  <th onClick={sortDifficulty}>
+                    Difficulty{" "}
+                    <span style={{ paddingTop: "-10px" }}>&#8964;</span>
+                  </th>
                 )}
-                {!showDefaultTable && <th onClick={sortLikes}>Likes</th>}
-                {!showDefaultTable && <th onClick={sortDislikes}>Dislikes</th>}
+                {!showDefaultTable && (
+                  <th onClick={sortLikes}>
+                    Likes <span style={{ paddingTop: "-10px" }}>&#8964;</span>
+                  </th>
+                )}
+                {!showDefaultTable && (
+                  <th onClick={sortDislikes}>
+                    Dislikes{" "}
+                    <span style={{ paddingTop: "-10px" }}>&#8964;</span>
+                  </th>
+                )}
               </tr>
             </thead>
             <tbody>{toggleTable && renderTable()}</tbody>

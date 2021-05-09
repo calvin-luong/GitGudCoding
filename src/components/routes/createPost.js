@@ -85,7 +85,7 @@ class createPost extends Component {
 
         <div class="container">
           <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12 col-md-offset-2">
               <h1>Create post</h1>
 
               <form action="" method="POST" onSubmit={this.handleOnSubmit}>
@@ -113,7 +113,8 @@ class createPost extends Component {
                     Description <span class="require">*</span>
                   </label>
                   <textarea
-                    rows="20"
+                    rows="10"
+                    style={{ width: "100%" }}
                     class="form-control"
                     name="description"
                     id="descriptionInput"
