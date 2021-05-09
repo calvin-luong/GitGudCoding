@@ -11,7 +11,7 @@ class DiscPost extends Component {
             <div class="media forum-item">
               <a href="#" data-toggle="collapse" data-target=".forum-content">
                 <img
-                  src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                  src={this.props.image}
                   class="mr-3 rounded-circle"
                   width="50"
                   alt="User"

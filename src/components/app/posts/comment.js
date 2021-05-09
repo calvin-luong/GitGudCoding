@@ -8,7 +8,7 @@ class comment extends Component {
         <div class="media mb-4" id="profile pic">
           <img
             class="d-flex mr-3 rounded-circle"
-            src="http://placehold.it/50x50"
+            src={this.props.image}
             alt=""
           />
           <div id="body">
