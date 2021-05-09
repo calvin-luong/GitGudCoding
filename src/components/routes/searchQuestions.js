@@ -163,7 +163,7 @@ const SearchQuestions = () => {
     <>
       <NavBar />
       {showSpinner && (
-        <div className="spinnerContainer">
+        <div className="spinnerContainer" style={{ marginTop: "-400px" }}>
           <div class="spinner-border text-secondary" role="status">
             <span class="sr-only">Loading...</span>
           </div>
@@ -180,6 +180,7 @@ const SearchQuestions = () => {
               aria-describedby="search-addon"
               id="searchInput"
             />
+
             <button
               type="button"
               class="btn btn-outline-primary"

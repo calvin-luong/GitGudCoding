@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import NavBar from "../app/admin/navbar";
 import axios from "axios";
 import DiscussionList from "../app/posts/discussionList";
-import moment from "moment";
-import image from "../../../src/resources/monke.jpeg";
+import VideoList from "../app/videos/videoList";
 
 class landing extends Component {
   state = {
     result: [],
+    video: [],
   };
 
   componentDidMount() {
@@ -34,13 +34,45 @@ class landing extends Component {
       .catch(function (error) {
         console.log(error);
       });
+    axios({
+      method: "GET",
+      url:
+        "/api/youtube/search?query=" +
+        "programming-tutorial" +
+        "&resultsSize=" +
+        12,
+    })
+      .then(function (response) {
+        console.log(response);
+        var result = [];
+
+        for (let i = 0; i < 12; i++) {
+          result.push({
+            id: response.data.searchResults[i].id.videoId,
+          });
+        }
+        self.setState((state) => ({
+          video: result,
+        }));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
   isEmpty() {
     if (this.state.result == 0) {
       return (
         <div>
-          <img src="https://emoji.gg/assets/emoji/3600_kermit_sips_tea.gif"></img>
-          <h1>No discussions so far</h1>
+          <div style={{ textAlign: "center" }}>
+            <img src="https://emoji.gg/assets/emoji/3600_kermit_sips_tea.gif"></img>
+            {
+              <h4 style={{ paddingTop: "20px" }}>
+                You have no posts or discussions but heres some reccomended
+                videos
+              </h4>
+            }{" "}
+          </div>
+          <VideoList result={this.state.video}></VideoList>
         </div>
       );
     }
@@ -50,9 +82,10 @@ class landing extends Component {
     return (
       <div>
         <NavBar></NavBar>
+        <div>{this.isEmpty()}</div>
+
         <div class="container mt-4">
           <div class="wrapper">
-            <div style={{ marginLeft: "30%" }}>{this.isEmpty()}</div>
             <DiscussionList result={this.state.result}></DiscussionList>
           </div>
         </div>
