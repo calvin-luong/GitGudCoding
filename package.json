@@ -2,12 +2,19 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": {
+    "/": {
+      "target": "http://peaceful-dusk-16502.herokuapp.com",
+      "ws": true
+    }
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "http-proxy-middleware": "^2.0.0",
     "jquery": "^3.6.0",
     "mdbreact": "^5.0.2",
     "moment": "^2.29.1",
