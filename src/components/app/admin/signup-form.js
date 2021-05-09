@@ -23,5 +23,5 @@ export default class SignUpForm extends Component {
 }
 
 function startGoogleAuth() {
-  window.location.href = "http://localhost:5000/google/auth";
+  window.location.href = "/google/auth";
 }

@@ -1,37 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Redirect, Route } from 'react-router-dom';
+import React from "react";
+import { Redirect, Route } from "react-router-dom";
+import { getIsAuthenticated } from "../../resolvers";
+import { useEffect, useState } from "react";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-   const [isUserLoggedIn, setUserIsLoggedIn] = useState(false);
+const PrivateRoute = (props) => {
+  const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-   useEffect(() => {
-      const apiUrl = 'localhost:5000/api/auth/check';
-      axios
-         .get(apiUrl)
-         .then(function (response) {
-            console.log(response);
-            setUserIsLoggedIn(response);
-         })
-         .catch(function (error) {
-            console.log(error);
-         });
-   }, []);
+  const { component: Component, ...rest } = props;
 
-   return (
-      <Route
-         {...rest}
-         render={(props) =>
-            isUserLoggedIn ? (
-               <Component {...props} />
-            ) : (
-               <Redirect
-                  to={{ pathname: '/login', state: { from: props.location } }}
-               />
-            )
-         }
-      />
-   );
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getIsAuthenticated();
+
+      setIsAuthenticated(result);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  return (
+    <Route
+      {...rest}
+      render={() =>
+        isAuthenticated ? (
+          <Component {...props} />
+        ) : loading ? (
+          <div>LOADING...</div>
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/sign-in",
+              state: { from: props.location },
+            }}
+          />
+        )
+      }
+    />
+  );
 };
-
 export default PrivateRoute;

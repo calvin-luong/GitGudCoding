@@ -8,3 +8,4 @@ export { default as CreatePostWVideo } from "./routes/createPostWithVideo";
 export { default as Landing } from "./routes/landing";
 export { default as PrivateRoute } from "./routes/privateRoute";
 export { default as NavBar } from "./app/admin/navbar";
+export { default as SearchQuestions } from "./routes/searchQuestions";

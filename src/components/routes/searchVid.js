@@ -12,10 +12,43 @@ class searchVid extends Component {
     super(props);
     this.onSearch = this.onSearch.bind(this);
   }
+  componentDidMount() {
+    var input = $("#searchInput").val();
+    var self = this;
+
+    self.setState((state) => ({
+      result: [],
+    }));
+    axios({
+      method: "GET",
+      url:
+        "/api/youtube/search?query=" +
+        "programming-tutorial" +
+        "&resultsSize=" +
+        12,
+    })
+      .then(function (response) {
+        console.log(response);
+        var result = [];
+
+        for (let i = 0; i < 12; i++) {
+          result.push({
+            id: response.data.searchResults[i].id.videoId,
+          });
+        }
+        self.setState((state) => ({
+          result: result,
+        }));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   onSearch() {
     var input = $("#searchInput").val();
     var self = this;
+
     self.setState((state) => ({
       result: [],
     }));
@@ -50,10 +83,14 @@ class searchVid extends Component {
     return (
       <div>
         <NavBar />
-        <h1>Videos</h1>
         <div
           class="input-group"
-          style={{ width: "50%", marginLeft: "auto", marginRight: "auto" }}
+          style={{
+            width: "50%",
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: "20px",
+          }}
         >
           <input
             type="search"

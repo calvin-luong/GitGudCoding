@@ -1,9 +1,86 @@
 import React, { Component } from "react";
 import NavBar from "../app/admin/navbar";
-import DiscPost from "../app/posts/discpost";
+import axios from "axios";
+import DiscussionList from "../app/posts/discussionList";
+import moment from "moment";
+import { getDiscussionsByTitle } from "../../resolvers";
+import image from "../../../src/resources/monke.jpeg";
 
 class discussion extends Component {
-  state = {};
+  state = {
+    result: [],
+    searchedResult: [],
+    searched: false,
+  };
+
+  constructor(props) {
+    super(props);
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    var self = this;
+
+    axios({ method: "GET", url: "/api/discussions/all" })
+      .then(function (response) {
+        var ids = [];
+
+        for (let i = response.data.length - 1; i >= 0; i--) {
+          var date = new Date(response.data[i].create_date);
+
+          ids.push({
+            id: response.data[i]._id,
+            title: response.data[i].title,
+            description: response.data[i].description,
+            creator: response.data[i].creatorName,
+            image: response.data[i].topics[0],
+            createdAt: String(date).split("GMT")[0],
+          });
+        }
+        console.log(ids);
+
+        self.setState({ ...self.state, result: ids });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  handleOnSubmit = async (e) => {
+    var self = this;
+    e.preventDefault();
+    self.state.searched = true;
+
+    var searchField = document.getElementById("search").value;
+    console.log(searchField);
+
+    if (searchField.length === 0) {
+      self.state.searched = false;
+    } else {
+      const searched = await getDiscussionsByTitle(searchField);
+
+      self.setState({ ...self.state, searchedResult: searched });
+      var total = [];
+      for (let i = self.state.searchedResult.length - 1; i >= 0; i--) {
+        var date = new Date(self.state.searchedResult[i].create_date);
+
+        total.push({
+          id: self.state.searchedResult[i]._id,
+          title: self.state.searchedResult[i].title,
+          description: self.state.searchedResult[i].description,
+          creator: self.state.searchedResult[i].creatorName,
+          createdAt: String(date).split("GMT")[0],
+          image: self.state.searchedResult[i].topics[0],
+        });
+      }
+      self.setState({ ...self.state, result: total });
+    }
+  };
+
+  emptyArray() {
+    this.state.result = [];
+  }
+
   render() {
     return (
       <div>
@@ -15,7 +92,7 @@ class discussion extends Component {
               class="btn btn-outline-secondary bg-gray-200 border-gray-200 shadow-none"
               href="/create-post"
             >
-              Create a Post
+              Start a Discussion
             </a>
             <select class="custom-select custom-select-sm w-auto mr-1 float-right">
               <option selected="">Latest</option>
@@ -25,17 +102,19 @@ class discussion extends Component {
               <option value="3">No Replies Yet</option>
             </select>
             <span class="input-icon input-icon-sm ml-auto w-auto">
-              <input
-                type="text"
-                class="form-control form-control-sm bg-gray-200 border-gray-200 shadow-none mb-2 mt-2"
-                placeholder="Search"
-              />
+              <form onSubmit={this.handleOnSubmit}>
+                <input
+                  type="text"
+                  id="search"
+                  class="form-control form-control-sm bg-gray-200 border-gray-200 shadow-none mb-2 mt-2"
+                  placeholder="Search"
+                />
+              </form>
             </span>
           </div>
           <div class="wrapper">
-            <DiscPost></DiscPost>
-            <DiscPost></DiscPost>
-            <DiscPost></DiscPost>
+            <DiscussionList result={this.state.result}></DiscussionList>
+            {this.emptyArray()}
           </div>
           <ul class="pagination pagination-sm pagination-circle justify-content-center mb-0">
             <li class="page-item disabled">
