@@ -3,24 +3,66 @@ import { Container } from "react-bootstrap";
 import NavBar from "../app/admin/navbar";
 import "../../styles/searchQuestions.scss";
 import "../../resolvers";
-import { getLeetcodeQuestionByTopic } from "../../resolvers";
+import { getLeetcodeQuestionByTopic, getAllLeetcode } from "../../resolvers";
 import $ from "jquery";
+import { MDBDataTable } from "mdbreact";
 
 const SearchQuestions = () => {
   const [questions, setQuestions] = useState([]);
   const [toggleTable, setToggleTable] = useState(false);
   const [showSpinner, toggleSpinner] = useState(false);
+  const [showDefaultTable, toggleDefaultTable] = useState(true);
+  const [firstRendered, setFirstRendered] = useState(false);
+  const [placeHolder, setPlaceHolder] = useState("");
   const numberOfResults = 20;
   const leetcodeUrl = "https://leetcode.com/problems/";
+  const topics = [
+    "Graph",
+    "String",
+    "Heap",
+    "Depth-first Search",
+    "Dynamic Programming",
+    "Math",
+    "Binary Search",
+  ];
+
+  React.useEffect(async () => {
+    if (!firstRendered) {
+      setFirstRendered(true);
+      toggleSpinner(true);
+      var response = [];
+      try {
+        response = await getAllLeetcode();
+      } catch (e) {
+        console.log("error!");
+      }
+
+      if (response) {
+        randomTopics();
+        setQuestions(response);
+        setToggleTable(true);
+        toggleSpinner(false);
+      }
+    }
+  });
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  function randomTopics() {
+    var i = topics.length;
+    setPlaceHolder(topics[getRandomInt(i)]);
+  }
 
   function createLink(titleSlug) {
     return leetcodeUrl + titleSlug;
   }
 
   function translateDifficulty(difficulty) {
-    if (difficulty === "Easy") return 0;
-    if (difficulty === "Medium") return 1;
-    if (difficulty === "Hard") return 2;
+    if (difficulty === "Easy" || difficulty === 1) return 0;
+    if (difficulty === "Medium" || difficulty === 2) return 1;
+    if (difficulty === "Hard" || difficulty === 3) return 2;
   }
 
   function sortTitle() {
@@ -119,30 +161,48 @@ const SearchQuestions = () => {
   }
 
   function renderTable() {
-    console.log(questions);
-    return (
-      <>
-        {questions.map((item, index) => (
-          <tr key={index}>
-            <td>
-              <a
-                href={createLink(item.allProblems.questionTitleSlug)}
-                id="title"
-              >
-                {item.allProblems.title}
-              </a>
-            </td>
-            <td id="difficulty">{item.allProblems.difficulty}</td>
-            <td id="likes">{item.allProblems.likes}</td>
-            <td id="dislikes">{item.allProblems.dislikes}</td>
-          </tr>
-        ))}
-      </>
-    );
+    //console.log(JSON.stringify(questions));
+    if (!showDefaultTable) {
+      return (
+        <>
+          {questions.map((item, index) => (
+            <tr key={index}>
+              <td>
+                <a
+                  href={createLink(item.allProblems.questionTitleSlug)}
+                  id="title"
+                >
+                  {item.allProblems.title}
+                </a>
+              </td>
+              <td id="difficulty">{item.allProblems.difficulty}</td>
+              <td id="likes">{item.allProblems.likes}</td>
+              <td id="dislikes">{item.allProblems.dislikes}</td>
+            </tr>
+          ))}
+        </>
+      );
+    } else {
+      return (
+        <>
+          {questions.allProblems.map((item, index) => (
+            <tr key={index}>
+              <td>
+                <a href={createLink(item.questionTitleSlug)} id="title">
+                  {item.title}
+                </a>
+              </td>
+              <td id="difficulty">{item.difficulty}</td>
+            </tr>
+          ))}
+        </>
+      );
+    }
   }
 
   async function onSearch() {
     toggleSpinner(true);
+    toggleDefaultTable(false);
     var input = $("#searchInput").val();
     var response = [];
 
@@ -153,8 +213,8 @@ const SearchQuestions = () => {
     }
 
     if (response) {
-      toggleSpinner(false);
       setQuestions(response);
+      toggleSpinner(false);
       setToggleTable(true);
     }
   }
@@ -175,7 +235,7 @@ const SearchQuestions = () => {
             <input
               type="search"
               class="form-control rounded"
-              placeholder="Topic name"
+              placeholder={"Filter by topic. Try: " + placeHolder}
               aria-label="Search"
               aria-describedby="search-addon"
               id="searchInput"
@@ -197,19 +257,27 @@ const SearchQuestions = () => {
           >
             <thead>
               <tr>
-                <th onClick={sortTitle}>Title</th>
-                <th onClick={sortDifficulty}>Difficulty</th>
-                <th onClick={sortLikes}>Likes</th>
-                <th onClick={sortDislikes}>Dislikes</th>
+                {showDefaultTable && <th>Title</th>}
+                {showDefaultTable && <th>Difficulty</th>}
+                {!showDefaultTable && <th onClick={sortTitle}>Title</th>}
+                {!showDefaultTable && (
+                  <th onClick={sortDifficulty}>Difficulty</th>
+                )}
+                {!showDefaultTable && <th onClick={sortLikes}>Likes</th>}
+                {!showDefaultTable && <th onClick={sortDislikes}>Dislikes</th>}
               </tr>
             </thead>
             <tbody>{toggleTable && renderTable()}</tbody>
             <tfoot>
               <tr>
-                <th>Title</th>
-                <th>Difficulty</th>
-                <th>Likes</th>
-                <th>Dislikes</th>
+                {showDefaultTable && <th>Title</th>}
+                {showDefaultTable && <th>Difficulty</th>}
+                {!showDefaultTable && <th onClick={sortTitle}>Title</th>}
+                {!showDefaultTable && (
+                  <th onClick={sortDifficulty}>Difficulty</th>
+                )}
+                {!showDefaultTable && <th onClick={sortLikes}>Likes</th>}
+                {!showDefaultTable && <th onClick={sortDislikes}>Dislikes</th>}
               </tr>
             </tfoot>
           </table>
