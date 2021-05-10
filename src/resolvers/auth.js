@@ -6,7 +6,7 @@ import axios from "axios";
 export async function getIsAuthenticated() {
   const auth = await axios({
     method: "GET",
-    url: "https://peaceful-dusk-16502.herokuapp.com/api/auth/check",
+    url: "/api/auth/check",
   });
 
   return auth.data.authenticated;
